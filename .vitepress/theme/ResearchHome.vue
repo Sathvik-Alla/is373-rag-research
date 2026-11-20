@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { withBase } from 'vitepress'
 const props = defineProps({ kind: String })
 const selected = ref('')
+const pageUrl = path => withBase(path + '.html')
 const isCareer = computed(() => props.kind === 'career')
 const choices = computed(() => isCareer.value ? [
   { id: 'employers', title: 'Inspect the employer evidence', detail: 'Three postings with eligibility, responsibilities, and gaps.', link: '/employers', result: 'Start with the Palantir FDE reference and the two Amazon early-career examples. Check each requirement against the linked posting.' },
@@ -38,14 +39,14 @@ const mapNodes = computed(() => isCareer.value ? [
       <p class="hero-description">{{ isCareer ? 'A career research plan connecting employer responsibilities to FastAPI work and a provisional backend engineering direction.' : 'A research plan for the Animated Realms Access Guide, answering account and permission questions with traceable evidence.' }}</p>
       <div class="hero-actions">
         <a class="primary-link" href="#explore">Explore the research</a>
-        <a :href="withBase(isCareer ? '/employers' : '/architecture')">{{ isCareer ? 'Read employer sources' : 'Follow the source trace' }}</a>
+        <a :href="pageUrl(isCareer ? '/employers' : '/architecture')">{{ isCareer ? 'Read employer sources' : 'Follow the source trace' }}</a>
       </div>
       <p class="scope-note">{{ isCareer ? 'Three employer examples · Two career directions · Plan stage' : 'Five source notes · Five evaluation questions · Plan stage' }}</p>
     </div>
     <div class="evidence-map" :aria-label="isCareer ? 'Research connections' : 'Proposed source-to-answer process'">
       <p class="map-title">{{ isCareer ? 'From responsibility to evidence' : 'From content to a supported answer' }}</p>
       <div class="map-grid">
-        <a v-for="(node, index) in mapNodes" :key="node.title" :class="'map-node node-' + index" :href="withBase(node.link)">{{ node.title }}</a>
+        <a v-for="(node, index) in mapNodes" :key="node.title" :class="'map-node node-' + index" :href="pageUrl(node.link)">{{ node.title }}</a>
         <div class="map-center"><strong>{{ isCareer ? 'My next role' : 'Source support' }}</strong><span>{{ isCareer ? 'Provisional direction' : 'Evidence to verify' }}</span></div>
       </div>
       <p class="map-caption">{{ isCareer ? 'Open a connection to inspect its evidence.' : 'The complete app journey is planned.' }}</p>
@@ -54,8 +55,8 @@ const mapNodes = computed(() => isCareer.value ? [
 
   <nav class="evidence-strip" aria-label="Research evidence">
     <strong>Open the evidence</strong>
-    <a :href="withBase(isCareer ? '/employers' : '/sources')">{{ isCareer ? 'Employer postings' : 'Source manifest' }}</a>
-    <a :href="withBase(isCareer ? '/checks' : '/evaluation')">Checks and limits</a>
+    <a :href="pageUrl(isCareer ? '/employers' : '/sources')">{{ isCareer ? 'Employer postings' : 'Source manifest' }}</a>
+    <a :href="pageUrl(isCareer ? '/checks' : '/evaluation')">Checks and limits</a>
     <a href="https://github.com/Sathvik-Alla/is373-career-research/blob/main/PROJECT_RECORD.md">Combined Individual Plan</a>
   </nav>
 
@@ -64,12 +65,12 @@ const mapNodes = computed(() => isCareer.value ? [
     <div class="choice-grid">
       <button v-for="item in choices" :key="item.id" type="button" :aria-pressed="selected === item.id" @click="selected = selected === item.id ? '' : item.id"><strong>{{ item.title }}</strong><span>{{ item.detail }}</span></button>
     </div>
-    <div v-if="active" class="choice-detail" aria-live="polite"><h3>{{ active.title }}</h3><p>{{ active.result }}</p><a :href="withBase(active.link)">Read this section</a></div>
+    <div v-if="active" class="choice-detail" aria-live="polite"><h3>{{ active.title }}</h3><p>{{ active.result }}</p><a :href="pageUrl(active.link)">Read this section</a></div>
   </section>
 
   <section class="next-step">
     <div><p class="kicker">Put the research into practice</p><h2>{{ isCareer ? 'Make one capability visible.' : 'Test one complete journey.' }}</h2><p>{{ isCareer ? 'A hiring reader should find the role, open an artifact, and understand my contribution.' : 'An answer should point to the passage that supports it and identify missing evidence.' }}</p></div>
-    <div><a :href="withBase(isCareer ? '/portfolio' : '/evaluation')">{{ isCareer ? 'Open the portfolio plan' : 'Open the evaluation plan' }}</a><p>{{ isCareer ? 'The group case-study link and peer feedback are pending.' : 'The keyword experiment has run. App retrieval and generation are next.' }}</p></div>
+    <div><a :href="pageUrl(isCareer ? '/portfolio' : '/evaluation')">{{ isCareer ? 'Open the portfolio plan' : 'Open the evaluation plan' }}</a><p>{{ isCareer ? 'The group case-study link and peer feedback are pending.' : 'The keyword experiment has run. App retrieval and generation are next.' }}</p></div>
   </section>
 </main>
 </template>
