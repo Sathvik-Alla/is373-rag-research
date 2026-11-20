@@ -12,6 +12,6 @@ Run `npm ci` and `npm run dev` to preview locally. Run `npm run build` to check 
 - [Permitted source manifest](research.md#source-manifest)
 - [Planned evaluation](research.md#planned-evaluation) · [Actual results](research.md#rag-actual-checks)
 
-The notebook navigation takes its cue from [Megan McNeal's RAG research repository](https://github.com/mtm5913/RAG-Research).
+Design direction is inspired by [Keith Williams’s AI Career Atlas](https://keithwilliams.org/ai-career-research/) and its [repository](https://github.com/kaw393939/ai-career-research). The custom homepage and theme implement the design for this project’s own sources and evidence.
 
-The VitePress homepage and navigation were inspired by [Mohammed Hammoudeh's RAG research site](https://mohammedhammoudeh8.github.io/is373-rag-research/).
+[Open the website](https://sathvik-alla.github.io/is373-rag-research/). Select a topic on the homepage to inspect its decision and open the detailed research.
